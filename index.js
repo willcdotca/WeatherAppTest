@@ -1,11 +1,7 @@
 const express = require('express');
-const axios = require('axios');
+const serve  = require('express-static');
 const app = express();
-const path = require('path');
-
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '/index.html'));
-});
+const axios = require('axios');
 
 app.get('/weather', async (req, res) => {
   try {
@@ -15,5 +11,7 @@ app.get('/weather', async (req, res) => {
     console.log(err);
   }
 });
+
+app.use(serve(__dirname + '/public'));
 
 app.listen(3000);
